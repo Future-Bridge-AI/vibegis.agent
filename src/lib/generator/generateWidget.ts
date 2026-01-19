@@ -17,7 +17,7 @@ type TokenMap = Record<string, string>;
 
 const replaceTokens = (template: string, tokens: TokenMap) =>
   Object.entries(tokens).reduce(
-    (result, [key, value]) => result.replaceAll(`{{${key}}}`, value),
+    (result, [key, value]) => result.split(`{{${key}}}`).join(value),
     template,
   );
 
