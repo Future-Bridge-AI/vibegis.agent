@@ -80,9 +80,12 @@ export const generateWidget = (state: WorkflowState): TemplateMap => {
   const hasMapView = widgetArchitecture.jimuIntegration.usesJimuMapView;
   const hasDataSource = widgetArchitecture.jimuIntegration.usesDataSourceComponent;
 
-  const jimuDependencies = widgetArchitecture.dependencies.requiredJimuModules
-    .map((moduleName) => `"${moduleName}"`)
-    .join(", ");
+  const requiredJimuModules =
+    widgetArchitecture.dependencies.requiredJimuModules;
+  const jimuDependencies =
+    requiredJimuModules.length > 0
+      ? `"${requiredJimuModules.join('", "')}"`
+      : "";
 
   const settingsInterface = buildSettingsInterface(
     widgetPRD.settingsConfig.settings,
